@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Abang ♡</title>
+<style>
+:root{
+ --site-primary:#c9798b;--site-secondary:#f8e3e7;--site-background:#fff8f5;
+ --site-on-primary:#fff;--site-on-secondary:#68434b;--site-on-background:#4b3539;
+ --site-font-body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ --site-font-heading:Georgia,"Times New Roman",serif;
+ --site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--site-background);color:var(--site-on-background);font-family:var(--site-font-body)}
+#app{min-height:100vh;background:var(--site-background);overflow:hidden}.decor{position:fixed;inset:0;pointer-events:none;opacity:var(--site-decoration-opacity);z-index:0}
+.float{position:absolute;font-size:22px;animation:up 7s ease-in-out infinite}.a{left:8%;top:18%}.b{right:10%;top:30%;animation-delay:1s}.c{left:12%;bottom:16%;animation-delay:2s}.d{right:16%;bottom:10%;animation-delay:3s}
+@keyframes up{50%{transform:translateY(-16px) rotate(7deg)}}
+.screen{min-height:100vh;display:grid;place-items:center;padding:28px;position:relative;z-index:1}
+.panel{width:min(720px,100%);background:#fff;border:1px solid #f0d9dd;border-radius:calc(30px * var(--site-radius-scale));padding:clamp(28px,6vw,60px);text-align:center;box-shadow:0 20px 70px rgba(103,64,72,.12)}
+.kicker{font-size:13px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;color:#9b5e6b}
+h1{font-family:var(--site-font-heading);font-size:calc(clamp(48px,10vw,82px)*var(--site-heading-scale));line-height:1;margin:18px 0;color:#8e5360}
+h2{font-family:var(--site-font-heading);font-size:calc(32px*var(--site-heading-scale));color:#8e5360}
+.lead{font-size:18px;line-height:1.75;max-width:560px;margin:auto}
+button{border:0;background:var(--site-primary);color:var(--site-on-primary);font-weight:800;padding:14px 23px;border-radius:999px;cursor:pointer;margin-top:24px;box-shadow:0 9px 24px rgba(201,121,139,.28);transition:.2s}
+button:hover{transform:translateY(-2px)}
+.hidden{display:none}
+.reveal{animation:reveal .7s ease}.card{background:#fff8f6;border-radius:calc(22px*var(--site-radius-scale));padding:24px;margin:22px 0;text-align:left;line-height:1.8}.card p{margin:0 0 14px}.card p:last-child{margin:0}
+.timeline{display:grid;gap:12px;margin-top:20px}.moment{background:#fff;border:1px solid #f0d9dd;border-radius:18px;padding:15px;text-align:left}.moment b{color:#9b5e6b}
+.small{font-size:14px;opacity:.78;line-height:1.7}.heartline{font-size:28px;letter-spacing:8px;margin:20px 0}
+@keyframes reveal{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+footer{margin-top:25px;font-size:13px;opacity:.7}
+@media(max-width:560px){.screen{padding:17px}.panel{padding:28px 20px}.lead{font-size:16px}}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="decor" aria-hidden="true"><span class="float a">♡</span><span class="float b">✦</span><span class="float c">♡</span><span class="float d">✧</span></div>
+
+<section class="screen" id="opening">
+  <div class="panel">
+    <div class="kicker">a little surprise for you</div>
+    <h1>psst... 🤫</h1>
+    <p class="lead">Ada sesuatu yang adek siapkan buat seseorang yang hari ini resmi masuk umur 20 tahun. 🎂🤏🏻</p>
+    <button onclick="go('birthday')">Buka kejutan 💌</button>
+  </div>
+</section>
+
+<section class="screen hidden" id="birthday">
+  <div class="panel reveal">
+    <div class="kicker">25 • 10 • 2026</div>
+    <h1>Happy 20th,<br>Abanggg! 🤍</h1>
+    <p class="lead">Selamat ulang tahun untuk pria kecil yang sekarang sok dewasa. 😾🤏🏻</p>
+    <div class="heartline">♡ ✦ ♡</div>
+    <button onclick="go('letter')">Ada surat buat abang →</button>
+  </div>
+</section>
+
+<section class="screen hidden" id="letter">
+  <div class="panel reveal">
+    <div class="kicker">from adek</div>
+    <h2>Untuk abang yang punya tempat sendiri 🤍</h2>
+    <div class="card">
+      <p>Haiii pria kecilku yang nakalll 🤏🏻😾🤍</p>
+      <p>Selamat ulang tahun yang ke-20, abanggg! Semoga abang selalu sehat, dimudahkan dalam segala urusan, dan semakin dekat dengan semua hal yang abang impikan.</p>
+      <p>Adek bersyukur banget karena dari sekian banyak orang yang bisa kita temui, ternyata kita dipertemukan dan akhirnya punya cerita sejauh ini.</p>
+      <p>Sebenarnya ada banyak hal kecil tentang hari-hari adek yang masih ingin adek ceritakan. Hal random, hal lucu, hal yang bikin senang, bahkan hal yang sebenarnya sepele. Adek cuma kangen rasanya bisa saling berbagi cerita tentang hari masing-masing.</p>
+      <p>Adek tahu abang punya kesibukan dan dunia abang sendiri. Adek nggak minta abang selalu ada. Adek cuma berharap, kalau suatu saat abang punya sedikit ruang, cerita-cerita kecil adek masih punya tempat di hari abang. 🥺</p>
+      <p>Terima kasih untuk semua candaan, perhatian kecil, waktu, dan kenangan yang pernah kita punya. Mungkin ada yang abang lupa, tapi beberapa hal sederhana itu masih adek simpan sebagai bagian dari cerita kita.</p>
+      <p>Adek juga minta maaf kalau selama ini ada sikap atau perkataan adek yang pernah bikin abang kurang nyaman. Adek masih belajar memahami abang dan menjadi pasangan yang lebih baik.</p>
+      <p>Semoga umur 20 ini membawa lebih banyak tawa, kesempatan, keberhasilan, dan alasan untuk bahagia. Jangan terlalu keras sama diri sendiri yaa, bang. Pelan-pelan aja. 🤍</p>
+      <p>Dan kalau boleh sedikit egois… semoga di antara banyak hal baik yang abang temui nanti, cerita kita tetap menjadi salah satu hal yang abang jaga. 🥹🤍</p>
+    </div>
+    <button onclick="go('memories')">Lanjut, ada satu bagian lagi ♡</button>
+  </div>
+</section>
+
+<section class="screen hidden" id="memories">
+  <div class="panel reveal">
+    <div class="kicker">little pieces of us</div>
+    <h2>Hal-hal kecil yang adek ingat 🥹</h2>
+    <div class="timeline">
+      <div class="moment"><b>♡ Obrolan random</b><br><span class="small">Nggak selalu penting, tapi sering jadi bagian yang bikin hari terasa lebih menyenangkan.</span></div>
+      <div class="moment"><b>♡ Ketawa & jahil-jahilan</b><br><span class="small">Abang yang kadang nyebelin, adek yang kadang ngambek. Tetap aja akhirnya jadi cerita yang diingat. 😾</span></div>
+      <div class="moment"><b>♡ Momen sederhana</b><br><span class="small">Hal-hal kecil yang mungkin abang anggap biasa, tapi ternyata bisa bikin adek senang seharian.</span></div>
+      <div class="moment"><b>♡ Kita, sejauh ini</b><br><span class="small">Nggak selalu sempurna, tapi punya banyak cerita yang cuma kita yang benar-benar tahu.</span></div>
+    </div>
+    <button onclick="go('secret')">Buka pesan terakhir 🎁</button>
+  </div>
+</section>
+
+<section class="screen hidden" id="secret">
+  <div class="panel reveal">
+    <div class="kicker">one last thing...</div>
+    <h2>Adek sayang abang. 🤍</h2>
+    <p class="lead">Semoga semua doa baik yang abang dengar hari ini satu per satu menjadi kenyataan.</p>
+    <div class="heartline">♡ ♡ ♡</div>
+    <p class="small">Terima kasih sudah menjadi bagian dari cerita hidup adek. Semoga di umur 20 ini abang semakin bahagia, semakin sukses, dan tetap menjadi abang yang adek kenal.</p>
+    <p style="font-weight:800;margin-top:25px">— dari adek yang masih suka manggil abang “pria kecil” walaupun sekarang udah 20 tahun 🤭🤏🏻💗</p>
+    <footer>Happy birthday, abanggg 🎂</footer>
+  </div>
+</section>
+</div>
+<script>
+function go(id){
+ document.querySelectorAll('.screen').forEach(x=>x.classList.add('hidden'));
+ const el=document.getElementById(id);el.classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
