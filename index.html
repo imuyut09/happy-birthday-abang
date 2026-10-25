@@ -30,10 +30,12 @@ button:hover{transform:translateY(-2px)}
 .small{font-size:14px;opacity:.78;line-height:1.7}.heartline{font-size:28px;letter-spacing:8px;margin:20px 0}
 @keyframes reveal{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 footer{margin-top:25px;font-size:13px;opacity:.7}
-@media(max-width:560px){.screen{padding:17px}.panel{padding:28px 20px}.lead{font-size:16px}}
+.music-toggle{position:fixed;top:20px;right:20px;z-index:10;padding:10px 14px;font-size:14px;margin:0;opacity:.95}
+@media(max-width:560px){.screen{padding:17px}.panel{padding:28px 20px}.lead{font-size:16px}.music-toggle{top:14px;right:14px;padding:9px 12px;font-size:12px}}
 </style>
 </head>
 <body>
+<button id="musicToggle" class="music-toggle" type="button" onclick="toggleMusic()">🔊 Musik</button>
 <div id="app">
 <div class="decor" aria-hidden="true"><span class="float a">♡</span><span class="float b">✦</span><span class="float c">♡</span><span class="float d">✧</span></div>
 
@@ -42,7 +44,7 @@ footer{margin-top:25px;font-size:13px;opacity:.7}
     <div class="kicker">a little surprise for you</div>
     <h1>psst... 🤫</h1>
     <p class="lead">Ada sesuatu yang adek siapkan buat seseorang yang hari ini resmi masuk umur 20 tahun. 🎂🤏🏻</p>
-    <button onclick="go('birthday')">Buka kejutan 💌</button>
+    <button onclick="go('birthday'); startMusic();">Buka kejutan 💌</button>
   </div>
 </section>
 
@@ -52,7 +54,7 @@ footer{margin-top:25px;font-size:13px;opacity:.7}
     <h1>Happy 20th,<br>Abanggg! 🤍</h1>
     <p class="lead">Selamat ulang tahun untuk pria kecil yang sekarang sok dewasa. 😾🤏🏻</p>
     <div class="heartline">♡ ✦ ♡</div>
-    <button onclick="go('letter')">Ada surat buat abang →</button>
+    <button onclick="go('letter'); startMusic();">Ada surat buat abang →</button>
   </div>
 </section>
 
@@ -71,7 +73,7 @@ footer{margin-top:25px;font-size:13px;opacity:.7}
       <p>Semoga umur 20 ini membawa lebih banyak tawa, kesempatan, keberhasilan, dan alasan untuk bahagia. Jangan terlalu keras sama diri sendiri yaa, bang. Pelan-pelan aja. 🤍</p>
       <p>Dan kalau boleh sedikit egois… semoga di antara banyak hal baik yang abang temui nanti, cerita kita tetap menjadi salah satu hal yang abang jaga. 🥹🤍</p>
     </div>
-    <button onclick="go('memories')">Lanjut, ada satu bagian lagi ♡</button>
+    <button onclick="go('memories'); startMusic();">Lanjut, ada satu bagian lagi ♡</button>
   </div>
 </section>
 
@@ -85,7 +87,7 @@ footer{margin-top:25px;font-size:13px;opacity:.7}
       <div class="moment"><b>♡ Momen sederhana</b><br><span class="small">Hal-hal kecil yang mungkin abang anggap biasa, tapi ternyata bisa bikin adek senang seharian.</span></div>
       <div class="moment"><b>♡ Kita, sejauh ini</b><br><span class="small">Nggak selalu sempurna, tapi punya banyak cerita yang cuma kita yang benar-benar tahu.</span></div>
     </div>
-    <button onclick="go('secret')">Buka pesan terakhir 🎁</button>
+    <button onclick="go('secret'); startMusic();">Buka pesan terakhir 🎁</button>
   </div>
 </section>
 
@@ -102,10 +104,85 @@ footer{margin-top:25px;font-size:13px;opacity:.7}
 </section>
 </div>
 <script>
+const musicButton = document.getElementById('musicToggle');
+let audioCtx = null;
+let musicTimer = null;
+let musicEnabled = false;
+const melody = [261.63, 329.63, 392.0, 329.63, 349.23, 440.0, 392.0, 329.63, 293.66, 261.63, 293.66, 349.23, 392.0, 349.23, 329.63, 293.66];
+
+function stopMusic() {
+  musicEnabled = false;
+  if (musicTimer) {
+    clearInterval(musicTimer);
+    musicTimer = null;
+  }
+  if (audioCtx) {
+    audioCtx.suspend();
+  }
+  if (musicButton) musicButton.textContent = '🔊 Musik';
+}
+
+function playTone(frequency, duration = 0.22, volume = 0.04) {
+  if (!audioCtx) return;
+  const oscillator = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  const now = audioCtx.currentTime;
+
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(frequency, now);
+
+  gainNode.gain.setValueAtTime(0.0001, now);
+  gainNode.gain.exponentialRampToValueAtTime(volume, now + 0.02);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  oscillator.start(now);
+  oscillator.stop(now + duration + 0.02);
+}
+
+function startMusic() {
+  if (musicEnabled) return;
+  if (!audioCtx) {
+    const AudioCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtor) return;
+    audioCtx = new AudioCtor();
+  }
+
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  musicEnabled = true;
+  if (musicButton) musicButton.textContent = '🔇 Musik';
+
+  let index = 0;
+  musicTimer = setInterval(() => {
+    const note = melody[index % melody.length];
+    playTone(note, 0.25, 0.04);
+    if (index % 2 === 0) {
+      playTone(note / 2, 0.18, 0.02);
+    }
+    index += 1;
+  }, 320);
+}
+
+function toggleMusic() {
+  if (musicEnabled) {
+    stopMusic();
+  } else {
+    startMusic();
+  }
+}
+
 function go(id){
  document.querySelectorAll('.screen').forEach(x=>x.classList.add('hidden'));
  const el=document.getElementById(id);el.classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});
 }
+
+window.addEventListener('pointerdown', startMusic, { once: true });
+window.addEventListener('keydown', startMusic, { once: true });
 </script>
 </body>
 </html>
